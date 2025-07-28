@@ -7,6 +7,7 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [role, setRole] = useState("operator");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const history = useHistory();
@@ -16,7 +17,7 @@ const Register: React.FC = () => {
     setError("");
     setSuccess("");
     try {
-      await registerUser(name, email, password);
+      await registerUser(name, email, password, role);
       setSuccess("Kayıt başarılı! Giriş yapabilirsiniz.");
       setTimeout(() => history.push("/"), 1500);
     } catch (err: any) {
@@ -36,6 +37,20 @@ const Register: React.FC = () => {
           onChange={e => setName(e.target.value)}
           required
         />
+        <TextField
+          select
+          label="Rol Seçiniz"
+          fullWidth
+          margin="normal"
+          value={role}
+          onChange={e => setRole(e.target.value)}
+          SelectProps={{ native: true }}
+          required
+        >
+          <option value="operator">Operatör</option>
+          <option value="manager">Yönetici</option>
+          <option value="admin">Admin</option>
+        </TextField>
         <TextField
           label="E-posta"
           type="email"

@@ -1,7 +1,7 @@
 // Kullanıcı kayıt fonksiyonu
-export const registerUser = async (name: string, email: string, password: string) => {
+export const registerUser = async (name: string, email: string, password: string, role: string) => {
     try {
-        const response = await axios.post('/api/auth/register', { name, email, password });
+        const response = await axios.post('/api/auth/register', { name, email, password, role });
         return response.data;
     } catch (error: any) {
         throw error.response ? error.response.data : error.message;
@@ -95,11 +95,9 @@ export const submitMachineCheck = async (checkData: any, token: string) => {
 };
 
 // Function to fetch user details
-export const fetchUserDetails = async (token: string) => {
+export const fetchUserDetails = async () => {
     try {
-        const response = await axios.get('/api/users/me', {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await axios.get('/api/users/me');
         return response.data;
     } catch (error: any) {
         throw error.response ? error.response.data : error.message;

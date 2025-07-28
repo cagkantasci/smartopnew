@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetchUserDetails(token)
+      fetchUserDetails()
         .then((data) => {
           setUser(data);
         })

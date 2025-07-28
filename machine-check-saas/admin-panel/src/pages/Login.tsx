@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import axios from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 
 const Login: React.FC = () => {
@@ -9,6 +10,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
+  const { setUser } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,7 +18,14 @@ const Login: React.FC = () => {
     try {
       const res = await axios.post("/api/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
-      history.push("/dashboard");
+      // Kullanıcıyı AuthContext'e ekle
+      if (res.data.user) {
+        setUser(res.data.user);
+        history.push("/dashboard");
+      } else {
+        // Eğer backend user objesi dönmüyorsa, fetchUserDetails ile çek
+        window.location.href = "/dashboard";
+      }
     } catch (err: any) {
       setError(err.response?.data?.message || "Giriş başarısız");
     }
