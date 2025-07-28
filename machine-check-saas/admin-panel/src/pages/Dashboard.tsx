@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getEquipments } from '../services/api';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
     const [equipments, setEquipments] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
+    const history = useHistory();
 
     // Token'dan kullanıcı adı okunursa göster
     let username = "";
@@ -21,15 +21,18 @@ const Dashboard: React.FC = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
-        navigate("/");
+        history.push("/");
     };
 
     useEffect(() => {
+        console.log('Dashboard useEffect çalıştı');
         const loadEquipments = async () => {
             try {
                 const result = await getEquipments();
+                console.log('getEquipments sonucu:', result);
                 setEquipments(result);
             } catch (err) {
+                console.error('Makine verisi alınamadı:', err);
                 setError('Makine verisi alınamadı');
             } finally {
                 setLoading(false);

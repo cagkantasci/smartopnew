@@ -1,9 +1,9 @@
 import React from "react";
 import { Typography, Box, AppBar, Toolbar, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Manage: React.FC = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   let username = "";
   try {
     const token = localStorage.getItem("token");
@@ -14,7 +14,7 @@ const Manage: React.FC = () => {
   } catch {}
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    history.push("/");
   };
   return (
     <Box>

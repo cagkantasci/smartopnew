@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Box, List, ListItem, ListItemText, AppBar, Toolbar, Button } from "@mui/material";
 import { getReports } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Reports: React.FC = () => {
   const [reports, setReports] = useState<any[]>([]);
-  const navigate = useNavigate();
+  const history = useHistory();
   // Token'dan kullanıcı adı okunursa göster
   let username = "";
   try {
@@ -18,7 +18,7 @@ const Reports: React.FC = () => {
   } catch {}
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    history.push("/");
   };
   useEffect(() => {
     getReports().then(setReports);

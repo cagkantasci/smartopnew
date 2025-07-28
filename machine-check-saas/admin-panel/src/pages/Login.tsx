@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import axios from "../services/api";
+
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("/auth/login", { email, password });
+      const res = await axios.post("/api/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      history.push("/dashboard");
     } catch (err: any) {
       setError(err.response?.data?.message || "Giriş başarısız");
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
   return (
     <Box maxWidth={400} mx="auto" mt={8}>
-      <Typography variant="h5" mb={2}>Yönetici Girişi</Typography>
+      <Typography variant="h5" mb={2}>Giriş Yap</Typography>
       <form onSubmit={handleLogin}>
         <TextField
           label="E-posta"
@@ -53,9 +49,7 @@ const Login: React.FC = () => {
           Giriş Yap
         </Button>
       </form>
-      <Button variant="text" color="secondary" fullWidth sx={{ mt: 2 }} onClick={handleLogout}>
-        Çıkış Yap
-      </Button>
+      <Button variant="text" color="secondary" fullWidth sx={{ mt: 1 }} onClick={() => history.push("/register")}>Kayıt Ol</Button>
     </Box>
   );
 };
