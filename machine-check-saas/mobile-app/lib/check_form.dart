@@ -7,7 +7,8 @@ class CheckFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Kontrol Formu')),
-      body: Center(child: Text('Makine kontrol formu ve fotoğraf yükleme ekranı')),
+      body: Center(
+          child: Text('Makine kontrol formu ve fotoğraf yükleme ekranı')),
     );
   }
 }

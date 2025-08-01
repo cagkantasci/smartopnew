@@ -14,18 +14,27 @@ class _OfflineSyncScreenState extends State<OfflineSyncScreen> {
   bool loading = false;
 
   Future<void> sendOfflineData() async {
-    setState(() { loading = true; result = null; });
+    setState(() {
+      loading = true;
+      result = null;
+    });
     try {
       final Map<String, dynamic> offlineData = {
         'data': _dataController.text,
         'timestamp': DateTime.now().toIso8601String(),
       };
       final res = await ApiService.sendOfflineData(offlineData);
-      setState(() { result = 'Başarılı: ${res['message'] ?? 'Veri senkronize edildi'}'; });
+      setState(() {
+        result = 'Başarılı: ${res['message'] ?? 'Veri senkronize edildi'}';
+      });
     } catch (e) {
-      setState(() { result = 'Hata: $e'; });
+      setState(() {
+        result = 'Hata: $e';
+      });
     } finally {
-      setState(() { loading = false; });
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -47,11 +56,17 @@ class _OfflineSyncScreenState extends State<OfflineSyncScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: loading ? null : sendOfflineData,
-              child: loading ? const CircularProgressIndicator() : const Text('Veriyi Gönder'),
+              child: loading
+                  ? const CircularProgressIndicator()
+                  : const Text('Veriyi Gönder'),
             ),
             if (result != null) ...[
               const SizedBox(height: 16),
-              Text(result!, style: TextStyle(color: result!.startsWith('Hata') ? Colors.red : Colors.green)),
+              Text(result!,
+                  style: TextStyle(
+                      color: result!.startsWith('Hata')
+                          ? Colors.red
+                          : Colors.green)),
             ],
           ],
         ),

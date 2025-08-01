@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Typography, Box, List, ListItem, ListItemText, AppBar, Toolbar, Button } from "@mui/material";
+import { Typography, Box, List, ListItem, ListItemText, Paper, Button } from "@mui/material";
 import { getReports } from "../services/api";
 import { useHistory } from "react-router-dom";
 
@@ -24,25 +24,34 @@ const Reports: React.FC = () => {
     getReports().then(setReports);
   }, []);
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Raporlar
-          </Typography>
-          {username && <Typography sx={{ mr: 2 }}>{username}</Typography>}
-          <Button color="inherit" onClick={handleLogout}>Çıkış</Button>
-        </Toolbar>
-      </AppBar>
-      <Box sx={{ mt: 4 }}>
+    <Box sx={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%)',
+      py: 6,
+      px: 2,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
+      <Box sx={{ width: '100%', maxWidth: 1200, mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="h4" fontWeight={700} color="primary.main">
+          Raporlar
+        </Typography>
+        <Box>
+          {username && <Typography sx={{ mr: 2, display: 'inline-block' }}>{username}</Typography>}
+          <Button color="primary" variant="outlined" onClick={handleLogout}>Çıkış</Button>
+        </Box>
+      </Box>
+      <Paper elevation={4} sx={{ p: 4, borderRadius: 3, width: '100%', maxWidth: 700 }}>
         <List>
+          {reports.length === 0 && <Typography color="text.secondary">Kayıtlı rapor bulunamadı.</Typography>}
           {reports.map((r) => (
-            <ListItem key={r.id}>
+            <ListItem key={r.id} divider>
               <ListItemText primary={r.description} secondary={`Durum: ${r.status}`} />
             </ListItem>
           ))}
         </List>
-      </Box>
+      </Paper>
     </Box>
   );
 };

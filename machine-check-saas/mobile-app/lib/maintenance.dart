@@ -14,18 +14,27 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
   bool loading = false;
 
   Future<void> addMaintenance() async {
-    setState(() { loading = true; result = null; });
+    setState(() {
+      loading = true;
+      result = null;
+    });
     try {
       final Map<String, dynamic> maintenanceData = {
         'description': _descController.text,
         'timestamp': DateTime.now().toIso8601String(),
       };
       final res = await ApiService.addMaintenance(maintenanceData);
-      setState(() { result = 'Başarılı: ${res['message'] ?? 'Bakım kaydı eklendi'}'; });
+      setState(() {
+        result = 'Başarılı: ${res['message'] ?? 'Bakım kaydı eklendi'}';
+      });
     } catch (e) {
-      setState(() { result = 'Hata: $e'; });
+      setState(() {
+        result = 'Hata: $e';
+      });
     } finally {
-      setState(() { loading = false; });
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -47,11 +56,17 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: loading ? null : addMaintenance,
-              child: loading ? const CircularProgressIndicator() : const Text('Bakım Kaydı Ekle'),
+              child: loading
+                  ? const CircularProgressIndicator()
+                  : const Text('Bakım Kaydı Ekle'),
             ),
             if (result != null) ...[
               const SizedBox(height: 16),
-              Text(result!, style: TextStyle(color: result!.startsWith('Hata') ? Colors.red : Colors.green)),
+              Text(result!,
+                  style: TextStyle(
+                      color: result!.startsWith('Hata')
+                          ? Colors.red
+                          : Colors.green)),
             ],
           ],
         ),

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import { TextField, Button, Box, Typography, Paper, Avatar } from "@mui/material";
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { registerUser } from "../services/api";
 import { useHistory } from "react-router-dom";
 
@@ -26,55 +27,71 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Box maxWidth={400} mx="auto" mt={8}>
-      <Typography variant="h5" mb={2}>Kayıt Ol</Typography>
-      <form onSubmit={handleRegister}>
-        <TextField
-          label="Ad Soyad"
-          fullWidth
-          margin="normal"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required
-        />
-        <TextField
-          select
-          label="Rol Seçiniz"
-          fullWidth
-          margin="normal"
-          value={role}
-          onChange={e => setRole(e.target.value)}
-          SelectProps={{ native: true }}
-          required
-        >
-          <option value="operator">Operatör</option>
-          <option value="manager">Yönetici</option>
-          <option value="admin">Admin</option>
-        </TextField>
-        <TextField
-          label="E-posta"
-          type="email"
-          fullWidth
-          margin="normal"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-        <TextField
-          label="Şifre"
-          type="password"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        {error && <Typography color="error">{error}</Typography>}
-        {success && <Typography color="primary">{success}</Typography>}
-        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-          Kayıt Ol
-        </Button>
-      </form>
+    <Box sx={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%)'
+    }}>
+      <Paper elevation={6} sx={{ p: 4, maxWidth: 400, width: '100%', borderRadius: 3, boxShadow: 3 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <PersonAddAltIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5" fontWeight={600} mb={1}>
+            Kayıt Ol
+          </Typography>
+        </Box>
+        <form onSubmit={handleRegister}>
+          <TextField
+            label="Ad Soyad"
+            fullWidth
+            margin="normal"
+            value={name}
+            onChange={e => setName(e.target.value)}
+            required
+          />
+          <TextField
+            select
+            label="Rol Seçiniz"
+            fullWidth
+            margin="normal"
+            value={role}
+            onChange={e => setRole(e.target.value)}
+            SelectProps={{ native: true }}
+            required
+            sx={{ background: '#f5f5f5' }}
+          >
+            <option value="operator">Operatör</option>
+            <option value="manager">Yönetici</option>
+            <option value="admin">Admin</option>
+          </TextField>
+          <TextField
+            label="E-posta"
+            type="email"
+            fullWidth
+            margin="normal"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <TextField
+            label="Şifre"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+          {error && <Typography color="error" sx={{ mt: 1 }}>{error}</Typography>}
+          {success && <Typography color="primary" sx={{ mt: 1 }}>{success}</Typography>}
+          <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2, py: 1.2, fontWeight: 600 }}>
+            Kayıt Ol
+          </Button>
+        </form>
+      </Paper>
     </Box>
   );
 };

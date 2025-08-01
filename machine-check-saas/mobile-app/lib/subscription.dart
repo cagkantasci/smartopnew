@@ -14,18 +14,27 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   bool loading = false;
 
   Future<void> startSubscription() async {
-    setState(() { loading = true; result = null; });
+    setState(() {
+      loading = true;
+      result = null;
+    });
     try {
       final Map<String, dynamic> subscriptionData = {
         'company': _companyController.text,
         'startDate': DateTime.now().toIso8601String(),
       };
       final res = await ApiService.startSubscription(subscriptionData);
-      setState(() { result = 'Başarılı: ${res['message'] ?? 'Abonelik başlatıldı'}'; });
+      setState(() {
+        result = 'Başarılı: ${res['message'] ?? 'Abonelik başlatıldı'}';
+      });
     } catch (e) {
-      setState(() { result = 'Hata: $e'; });
+      setState(() {
+        result = 'Hata: $e';
+      });
     } finally {
-      setState(() { loading = false; });
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -45,11 +54,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: loading ? null : startSubscription,
-              child: loading ? const CircularProgressIndicator() : const Text('Abonelik Başlat'),
+              child: loading
+                  ? const CircularProgressIndicator()
+                  : const Text('Abonelik Başlat'),
             ),
             if (result != null) ...[
               const SizedBox(height: 16),
-              Text(result!, style: TextStyle(color: result!.startsWith('Hata') ? Colors.red : Colors.green)),
+              Text(result!,
+                  style: TextStyle(
+                      color: result!.startsWith('Hata')
+                          ? Colors.red
+                          : Colors.green)),
             ],
           ],
         ),

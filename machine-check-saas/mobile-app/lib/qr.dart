@@ -14,14 +14,23 @@ class _QrScreenState extends State<QrScreen> {
   bool loading = false;
 
   Future<void> readQr() async {
-    setState(() { loading = true; result = null; });
+    setState(() {
+      loading = true;
+      result = null;
+    });
     try {
       final res = await ApiService.readQr(_qrController.text);
-      setState(() { result = 'Başarılı: ${res['data'] ?? 'QR okundu'}'; });
+      setState(() {
+        result = 'Başarılı: ${res['data'] ?? 'QR okundu'}';
+      });
     } catch (e) {
-      setState(() { result = 'Hata: $e'; });
+      setState(() {
+        result = 'Hata: $e';
+      });
     } finally {
-      setState(() { loading = false; });
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -41,11 +50,17 @@ class _QrScreenState extends State<QrScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: loading ? null : readQr,
-              child: loading ? const CircularProgressIndicator() : const Text('QR Oku'),
+              child: loading
+                  ? const CircularProgressIndicator()
+                  : const Text('QR Oku'),
             ),
             if (result != null) ...[
               const SizedBox(height: 16),
-              Text(result!, style: TextStyle(color: result!.startsWith('Hata') ? Colors.red : Colors.green)),
+              Text(result!,
+                  style: TextStyle(
+                      color: result!.startsWith('Hata')
+                          ? Colors.red
+                          : Colors.green)),
             ],
           ],
         ),

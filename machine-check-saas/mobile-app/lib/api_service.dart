@@ -31,7 +31,8 @@ class ApiService {
     }
   }
 
-  static Future<Map<String, dynamic>> sendNotification(String token, String title, String body) async {
+  static Future<Map<String, dynamic>> sendNotification(
+      String token, String title, String body) async {
     final response = await http.post(
       Uri.parse('$baseUrl/notification/send'),
       headers: {'Content-Type': 'application/json'},
@@ -43,8 +44,10 @@ class ApiService {
       throw Exception('Bildirim gönderilemedi');
     }
   }
+
   // Kullanıcı girişi
-  static Future<Map<String, dynamic>> login(String email, String password) async {
+  static Future<Map<String, dynamic>> login(
+      String email, String password) async {
     final response = await http.post(
       Uri.parse('$baseUrl/auth/login'),
       headers: {'Content-Type': 'application/json'},
@@ -58,7 +61,8 @@ class ApiService {
   }
 
   // Rapor oluşturma
-  static Future<Map<String, dynamic>> createReport(Map<String, dynamic> reportData) async {
+  static Future<Map<String, dynamic>> createReport(
+      Map<String, dynamic> reportData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/report'),
       headers: {'Content-Type': 'application/json'},
@@ -72,7 +76,8 @@ class ApiService {
   }
 
   // Ekipman ekleme
-  static Future<Map<String, dynamic>> addEquipment(Map<String, dynamic> equipmentData) async {
+  static Future<Map<String, dynamic>> addEquipment(
+      Map<String, dynamic> equipmentData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/equipment'),
       headers: {'Content-Type': 'application/json'},
@@ -86,7 +91,8 @@ class ApiService {
   }
 
   // Checklist ekleme
-  static Future<Map<String, dynamic>> addChecklist(Map<String, dynamic> checklistData) async {
+  static Future<Map<String, dynamic>> addChecklist(
+      Map<String, dynamic> checklistData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/checklist'),
       headers: {'Content-Type': 'application/json'},
@@ -100,7 +106,8 @@ class ApiService {
   }
 
   // Offline veri gönderme
-  static Future<Map<String, dynamic>> sendOfflineData(Map<String, dynamic> offlineData) async {
+  static Future<Map<String, dynamic>> sendOfflineData(
+      Map<String, dynamic> offlineData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/offline/sync'),
       headers: {'Content-Type': 'application/json'},
@@ -128,7 +135,8 @@ class ApiService {
   }
 
   // Bakım kaydı ekleme
-  static Future<Map<String, dynamic>> addMaintenance(Map<String, dynamic> maintenanceData) async {
+  static Future<Map<String, dynamic>> addMaintenance(
+      Map<String, dynamic> maintenanceData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/maintenance'),
       headers: {'Content-Type': 'application/json'},
@@ -142,7 +150,8 @@ class ApiService {
   }
 
   // Abonelik başlatma
-  static Future<Map<String, dynamic>> startSubscription(Map<String, dynamic> subscriptionData) async {
+  static Future<Map<String, dynamic>> startSubscription(
+      Map<String, dynamic> subscriptionData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/subscription/start'),
       headers: {'Content-Type': 'application/json'},
@@ -156,7 +165,8 @@ class ApiService {
   }
 
   // AI tahmin fonksiyonu
-  static Future<Map<String, dynamic>> getAIPrediction(Map<String, dynamic> inputData) async {
+  static Future<Map<String, dynamic>> getAIPrediction(
+      Map<String, dynamic> inputData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/ai/predict'),
       headers: {'Content-Type': 'application/json'},

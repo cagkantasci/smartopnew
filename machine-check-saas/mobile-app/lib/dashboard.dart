@@ -14,7 +14,9 @@ class DashboardScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Makine verisi alınamadı: ${snapshot.error}', style: TextStyle(color: Colors.red)));
+            return Center(
+                child: Text('Makine verisi alınamadı: ${snapshot.error}',
+                    style: TextStyle(color: Colors.red)));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('Hiç makine bulunamadı.'));
           } else {

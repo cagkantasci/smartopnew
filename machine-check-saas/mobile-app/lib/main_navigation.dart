@@ -28,7 +28,8 @@ class _MainNavigationState extends State<MainNavigation> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Panel'),
           BottomNavigationBarItem(icon: Icon(Icons.check), label: 'Kontrol'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Bildirim'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), label: 'Bildirim'),
         ],
       ),
     );

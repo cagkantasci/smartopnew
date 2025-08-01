@@ -16,18 +16,27 @@ class _NotificationScreenState extends State<NotificationScreen> {
   bool loading = false;
 
   Future<void> sendNotification() async {
-    setState(() { loading = true; result = null; });
+    setState(() {
+      loading = true;
+      result = null;
+    });
     try {
       final res = await ApiService.sendNotification(
         _tokenController.text,
         _titleController.text,
         _bodyController.text,
       );
-      setState(() { result = 'Başarılı: ${res['message'] ?? 'Bildirim gönderildi'}'; });
+      setState(() {
+        result = 'Başarılı: ${res['message'] ?? 'Bildirim gönderildi'}';
+      });
     } catch (e) {
-      setState(() { result = 'Hata: $e'; });
+      setState(() {
+        result = 'Hata: $e';
+      });
     } finally {
-      setState(() { loading = false; });
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -55,11 +64,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: loading ? null : sendNotification,
-              child: loading ? const CircularProgressIndicator() : const Text('Bildirim Gönder'),
+              child: loading
+                  ? const CircularProgressIndicator()
+                  : const Text('Bildirim Gönder'),
             ),
             if (result != null) ...[
               const SizedBox(height: 16),
-              Text(result!, style: TextStyle(color: result!.startsWith('Hata') ? Colors.red : Colors.green)),
+              Text(result!,
+                  style: TextStyle(
+                      color: result!.startsWith('Hata')
+                          ? Colors.red
+                          : Colors.green)),
             ],
           ],
         ),
