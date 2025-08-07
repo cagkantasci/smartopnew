@@ -4,7 +4,7 @@ import { reports } from "./reportController";
 
 export const getStats = (req: Request, res: Response) => {
   // Toplam çalışma saati
-  const totalWorkHours = worklogs.reduce((sum, w) => {
+  const totalWorkHours = worklogs.reduce((sum: number, w: any) => {
     if (w.start_time && w.end_time) {
       const start = new Date(w.start_time).getTime();
       const end = new Date(w.end_time).getTime();
@@ -14,7 +14,7 @@ export const getStats = (req: Request, res: Response) => {
   }, 0);
 
   // Toplam yakıt maliyeti
-  const totalFuelCost = worklogs.reduce((sum, w) => sum + (w.fuel_cost || 0), 0);
+  const totalFuelCost = worklogs.reduce((sum: number, w: any) => sum + (w.fuel_cost || 0), 0);
 
   // Toplam rapor sayısı
   const totalReports = reports.length;

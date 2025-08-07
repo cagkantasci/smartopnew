@@ -6,6 +6,9 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
+export const equipments: any[] = [ /* ... */ ]; // zaten varsa sadece export ekleyin
+export const worklogs: any[] = [];
+
 const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

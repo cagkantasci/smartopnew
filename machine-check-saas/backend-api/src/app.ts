@@ -1,3 +1,17 @@
+// Demo veri ekleme
+import { pool } from './services/db';
+async function addDemoData() {
+  // Şirket ekle
+  await pool.query(`INSERT INTO companies (id, name) VALUES (1, 'Demo Şirket') ON CONFLICT (id) DO NOTHING`);
+  // Ekipman ekle
+  await pool.query(`INSERT INTO equipments (id, name, plate, type, company_id) VALUES (1, 'Test Makine', 'ABC123', 'Kompresör', 1) ON CONFLICT (id) DO NOTHING`);
+  // Kullanıcı ekle
+  await pool.query(`INSERT INTO users (id, email, password, role) VALUES (1, 'demo@demo.com', '$2a$10$Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9QOQ9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9', 'admin') ON CONFLICT (id) DO NOTHING`);
+  // Rapor ekle
+  await pool.query(`INSERT INTO reports (id, title, description, equipment_id, created_by) VALUES (1, 'Test Rapor', 'Test açıklama', 1, 1) ON CONFLICT (id) DO NOTHING`);
+}
+
+addDemoData().catch(console.error);
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";

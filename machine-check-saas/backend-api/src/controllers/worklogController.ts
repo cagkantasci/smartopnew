@@ -1,3 +1,4 @@
+export const worklogs: any[] = [];
 
 import { Request, Response } from "express";
 import { pool } from "../services/db";

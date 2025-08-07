@@ -1,4 +1,3 @@
-
 import { Request, Response } from "express";
 import { pool } from "../services/db";
 
@@ -27,3 +26,4 @@ export const getEquipments = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Makineler alınamadı", error: err });
   }
 };
+// ...mock equipments dizisi kaldırıldı...

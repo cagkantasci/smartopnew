@@ -1,3 +1,4 @@
+export const reports: any[] = [];
 // Raporu onayla
 export const approveReport = async (req: Request, res: Response) => {
   const reportId = req.params.id;
