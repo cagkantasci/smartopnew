@@ -178,4 +178,46 @@ class ApiService {
       throw Exception('AI tahmini alınamadı');
     }
   }
+
+  // Raporu onayla
+  static Future<Map<String, dynamic>> approveReport(
+      int reportId, int approvedBy) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/report/$reportId/approve'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'approved_by': approvedBy}),
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Rapor onaylanamadı');
+    }
+  }
+
+  // Raporu reddet
+  static Future<Map<String, dynamic>> rejectReport(
+      int reportId, int approvedBy) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/report/$reportId/reject'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'approved_by': approvedBy}),
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Rapor reddedilemedi');
+    }
+  }
+
+  // Bildirimleri listele
+  static Future<List<dynamic>> getNotifications(int userId) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/notification/list?user_id=$userId'),
+    );
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Bildirimler alınamadı');
+    }
+  }
 }

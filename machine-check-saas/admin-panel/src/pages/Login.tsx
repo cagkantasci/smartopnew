@@ -4,6 +4,8 @@ import { TextField, Button, Box, Typography, Paper, Avatar } from "@mui/material
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import axios from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 
 const Login: React.FC = () => {
@@ -32,6 +34,7 @@ const Login: React.FC = () => {
     }
   };
 
+  const { t } = useTranslation();
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -42,16 +45,17 @@ const Login: React.FC = () => {
     }}>
       <Paper elevation={6} sx={{ p: 4, maxWidth: 380, width: '100%', borderRadius: 3, boxShadow: 3 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
+          <LanguageSwitcher />
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" fontWeight={600} mb={1}>
-            Giriş Yap
+            {t('login')}
           </Typography>
         </Box>
         <form onSubmit={handleLogin}>
           <TextField
-            label="E-posta"
+            label={t('login') + ' E-posta'}
             type="email"
             fullWidth
             margin="normal"
@@ -61,7 +65,7 @@ const Login: React.FC = () => {
             autoFocus
           />
           <TextField
-            label="Şifre"
+            label={t('login') + ' Şifre'}
             type="password"
             fullWidth
             margin="normal"
@@ -71,10 +75,10 @@ const Login: React.FC = () => {
           />
           {error && <Typography color="error" sx={{ mt: 1 }}>{error}</Typography>}
           <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2, py: 1.2, fontWeight: 600 }}>
-            Giriş Yap
+            {t('login')}
           </Button>
         </form>
-        <Button variant="text" color="secondary" fullWidth sx={{ mt: 2 }} onClick={() => history.push("/register")}>Kayıt Ol</Button>
+        <Button variant="text" color="secondary" fullWidth sx={{ mt: 2 }} onClick={() => history.push("/register")}>{t('logout')}</Button>
       </Paper>
     </Box>
   );

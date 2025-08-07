@@ -1,0 +1,12 @@
+{
+  "welcome": "Hoşgeldiniz",
+  "login": "Giriş",
+  "logout": "Çıkış",
+  "dashboard": "Panel",
+  "approve": "Onayla",
+  "reject": "Reddet",
+  "notifications": "Bildirimler",
+  "reports": "Raporlar",
+  "equipments": "Ekipmanlar",
+  "checklists": "Kontrol Listeleri"
+}

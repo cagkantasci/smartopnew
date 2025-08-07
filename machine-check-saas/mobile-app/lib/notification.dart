@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'l10n/app_localizations.dart';
 import 'api_service.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -27,11 +28,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
         _bodyController.text,
       );
       setState(() {
-        result = 'Başarılı: ${res['message'] ?? 'Bildirim gönderildi'}';
+        result =
+            '${AppLocalizations.of(context)!.success}: ${res['message'] ?? AppLocalizations.of(context)!.notificationSent}';
       });
     } catch (e) {
       setState(() {
-        result = 'Hata: $e';
+        result = '${AppLocalizations.of(context)!.error}: $e';
       });
     } finally {
       setState(() {

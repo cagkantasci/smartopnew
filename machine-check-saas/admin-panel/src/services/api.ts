@@ -103,3 +103,33 @@ export const fetchUserDetails = async () => {
         throw error.response ? error.response.data : error.message;
     }
 };
+
+// Raporu onayla
+export const approveReport = async (reportId: number, approvedBy: number) => {
+    try {
+        const response = await axios.post(`/api/report/${reportId}/approve`, { approved_by: approvedBy });
+        return response.data;
+    } catch (error: any) {
+        throw error.response ? error.response.data : error.message;
+    }
+};
+
+// Raporu reddet
+export const rejectReport = async (reportId: number, approvedBy: number) => {
+    try {
+        const response = await axios.post(`/api/report/${reportId}/reject`, { approved_by: approvedBy });
+        return response.data;
+    } catch (error: any) {
+        throw error.response ? error.response.data : error.message;
+    }
+};
+
+// Bildirimleri listele
+export const getNotifications = async (userId: number) => {
+    try {
+        const response = await axios.get(`/api/notification/list`, { params: { user_id: userId } });
+        return response.data;
+    } catch (error: any) {
+        throw error.response ? error.response.data : error.message;
+    }
+};

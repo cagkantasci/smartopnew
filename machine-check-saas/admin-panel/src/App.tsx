@@ -2,6 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
+import Reports from './pages/Reports';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import '../i18n';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +15,9 @@ const App: React.FC = () => {
         <main>
           <Switch>
             <Route path="/" exact component={Dashboard} />
-            {/* Add more routes as needed */}
+            <Route path="/reports" exact component={Reports} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
           </Switch>
         </main>
       </div>

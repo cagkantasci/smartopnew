@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Typography, Box, List, ListItem, ListItemText, Paper, Button } from "@mui/material";
 import { getReports } from "../services/api";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Reports: React.FC = () => {
   const [reports, setReports] = useState<any[]>([]);
@@ -23,6 +25,7 @@ const Reports: React.FC = () => {
   useEffect(() => {
     getReports().then(setReports);
   }, []);
+  const { t } = useTranslation();
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -35,16 +38,17 @@ const Reports: React.FC = () => {
     }}>
       <Box sx={{ width: '100%', maxWidth: 1200, mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="h4" fontWeight={700} color="primary.main">
-          Raporlar
+          {t('reports')}
         </Typography>
-        <Box>
-          {username && <Typography sx={{ mr: 2, display: 'inline-block' }}>{username}</Typography>}
-          <Button color="primary" variant="outlined" onClick={handleLogout}>Çıkış</Button>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <LanguageSwitcher />
+          {username && <Typography sx={{ mr: 2, ml: 2, display: 'inline-block' }}>{username}</Typography>}
+          <Button color="primary" variant="outlined" onClick={handleLogout}>{t('logout')}</Button>
         </Box>
       </Box>
       <Paper elevation={4} sx={{ p: 4, borderRadius: 3, width: '100%', maxWidth: 700 }}>
         <List>
-          {reports.length === 0 && <Typography color="text.secondary">Kayıtlı rapor bulunamadı.</Typography>}
+          {reports.length === 0 && <Typography color="text.secondary">{t('notifications')}</Typography>}
           {reports.map((r) => (
             <ListItem key={r.id} divider>
               <ListItemText primary={r.description} secondary={`Durum: ${r.status}`} />

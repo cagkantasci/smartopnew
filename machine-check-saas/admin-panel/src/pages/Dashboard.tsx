@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import { Box, Typography, Grid, Paper, Avatar, Button } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
@@ -40,6 +42,7 @@ const Dashboard: React.FC = () => {
     });
   }, []);
 
+  const { t } = useTranslation();
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -52,11 +55,12 @@ const Dashboard: React.FC = () => {
     }}>
       <Box sx={{ width: '100%', maxWidth: 1200, mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="h4" fontWeight={700} color="primary.main">
-          Yönetim Paneli
+          {t('dashboard')}
         </Typography>
-        <Box>
-          {username && <Typography sx={{ mr: 2, display: 'inline-block' }}>{username}</Typography>}
-          <Button color="primary" variant="outlined" onClick={handleLogout}>Çıkış</Button>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <LanguageSwitcher />
+          {username && <Typography sx={{ mr: 2, ml: 2, display: 'inline-block' }}>{username}</Typography>}
+          <Button color="primary" variant="outlined" onClick={handleLogout}>{t('logout')}</Button>
         </Box>
       </Box>
       <Grid container spacing={4} justifyContent="center" maxWidth={900}>
@@ -65,7 +69,7 @@ const Dashboard: React.FC = () => {
             <Avatar sx={{ bgcolor: 'primary.main', width: 48, height: 48, mb: 1 }}>
               <GroupIcon fontSize="large" />
             </Avatar>
-            <Typography variant="h6" fontWeight={600} color="text.secondary">Toplam Kullanıcı</Typography>
+            <Typography variant="h6" fontWeight={600} color="text.secondary">{t('welcome')}</Typography>
             <Typography variant="h3" fontWeight={700} color="primary.main">{stats.users || 0}</Typography>
           </Paper>
         </Grid>
@@ -74,7 +78,7 @@ const Dashboard: React.FC = () => {
             <Avatar sx={{ bgcolor: 'success.main', width: 48, height: 48, mb: 1 }}>
               <BuildCircleIcon fontSize="large" />
             </Avatar>
-            <Typography variant="h6" fontWeight={600} color="text.secondary">Toplam Ekipman</Typography>
+            <Typography variant="h6" fontWeight={600} color="text.secondary">{t('equipments')}</Typography>
             <Typography variant="h3" fontWeight={700} color="success.main">{stats.equipment || 0}</Typography>
           </Paper>
         </Grid>
@@ -83,7 +87,7 @@ const Dashboard: React.FC = () => {
             <Avatar sx={{ bgcolor: 'warning.main', width: 48, height: 48, mb: 1 }}>
               <DescriptionIcon fontSize="large" />
             </Avatar>
-            <Typography variant="h6" fontWeight={600} color="text.secondary">Toplam Rapor</Typography>
+            <Typography variant="h6" fontWeight={600} color="text.secondary">{t('reports')}</Typography>
             <Typography variant="h3" fontWeight={700} color="warning.main">{stats.reports || 0}</Typography>
           </Paper>
         </Grid>

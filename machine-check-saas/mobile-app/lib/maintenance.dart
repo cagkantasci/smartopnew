@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'l10n/app_localizations.dart';
 import 'api_service.dart';
 
 class MaintenanceScreen extends StatefulWidget {
@@ -25,11 +26,12 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       };
       final res = await ApiService.addMaintenance(maintenanceData);
       setState(() {
-        result = 'Başarılı: ${res['message'] ?? 'Bakım kaydı eklendi'}';
+        result =
+            '${AppLocalizations.of(context)!.success}: ${res['message'] ?? AppLocalizations.of(context)!.maintenanceAdded}';
       });
     } catch (e) {
       setState(() {
-        result = 'Hata: $e';
+        result = '${AppLocalizations.of(context)!.error}: $e';
       });
     } finally {
       setState(() {

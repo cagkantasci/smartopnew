@@ -24,6 +24,7 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^24.1.0",
     "@types/parse-json": "^4.0.2",
+    "@types/pg": "^8.15.5",
     "@types/prettier": "^2.7.3",
     "@types/prop-types": "^15.7.15",
     "@types/react": "^19.1.8",

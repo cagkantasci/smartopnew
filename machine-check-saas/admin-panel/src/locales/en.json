@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome",
+  "login": "Login",
+  "logout": "Logout",
+  "dashboard": "Dashboard",
+  "approve": "Approve",
+  "reject": "Reject",
+  "notifications": "Notifications",
+  "reports": "Reports",
+  "equipments": "Equipments",
+  "checklists": "Checklists"
+}
